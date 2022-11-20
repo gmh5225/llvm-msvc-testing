@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <stdio.h>
+#include <intrin.h>
 #include <lazy_importer/include/lazy_importer.hpp>
 
 void
@@ -25,9 +26,30 @@ test_lazy_importer()
     LI_FN(VirtualProtect).cached();
 }
 
+#define Np_memcpy(dst, src, size) __movsb((BYTE *)dst, (const BYTE *)src, size)
+#define Np_memset(dst, val, size) __stosb((BYTE *)dst, val, size)
+#define Np_ZeroMemory(dst, size) __stosb((BYTE *)dst, 0, size)
+void
+test_memset()
+{
+    char pTempDll[250]; // = { 0 };
+    Np_ZeroMemory(pTempDll, sizeof(pTempDll));
+    for (int i = 0; i < 250; ++i)
+    {
+        printf("%d\n", pTempDll[i]);
+    }
+    unsigned char temp2[2] = {0xaa, 0xbb};
+    Np_memcpy(pTempDll, temp2, 2);
+    for (int i = 0; i < 10; ++i)
+    {
+        printf("%d\n", pTempDll[i]);
+    }
+}
+
 int
 main()
 {
+    test_memset();
     test_lazy_importer();
     test_conflict_section();
     printf("a_CodData=%x\n", a_CodData);
