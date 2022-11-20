@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <lazy_importer/include/lazy_importer.hpp>
 
+void
+test_ctor_1();
+
+///////////////////////////////////////////////////////////////////////////////////
 #pragma comment(linker, "/SECTION:.CODE,ERW")
 __declspec(allocate(".CODE")) int a_CodData{0xAA};
 
@@ -27,6 +31,7 @@ main()
     test_lazy_importer();
     test_conflict_section();
     printf("a_CodData=%x\n", a_CodData);
+    test_ctor_1();
     system("pause");
     return 0;
 }
