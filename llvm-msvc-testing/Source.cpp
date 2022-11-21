@@ -29,6 +29,10 @@ test_lazy_importer()
 #define Np_memcpy(dst, src, size) __movsb((BYTE *)dst, (const BYTE *)src, size)
 #define Np_memset(dst, val, size) __stosb((BYTE *)dst, val, size)
 #define Np_ZeroMemory(dst, size) __stosb((BYTE *)dst, 0, size)
+
+#ifdef __clang__
+__attribute((force_align_arg_pointer))
+#endif
 void
 test_memset()
 {
