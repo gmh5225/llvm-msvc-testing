@@ -50,6 +50,7 @@ test_memset()
     }
 }
 
+#define PRTOUT(X)
 int
 main()
 {
@@ -58,6 +59,8 @@ main()
     test_conflict_section();
     printf("a_CodData=%x\n", a_CodData);
     test_ctor_1();
+    int rs = 2;
+    PRTOUT("xx:0x%08X", rs);
     system("pause");
     return 0;
 }
