@@ -4,13 +4,13 @@
 class myclass1
 {
 public:
-    virtual unsigned int get() const { return 1; }
+    virtual unsigned int get() const { return 11; }
 };
 
 class myclass2 : public myclass1
 {
 public:
-    virtual unsigned int get() const override { return 2; }
+    virtual unsigned int get() const override { return 22; }
 
 public:
     myclass2(unsigned int a, unsigned int b, unsigned int c, unsigned int d)
